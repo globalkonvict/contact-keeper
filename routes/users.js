@@ -60,7 +60,7 @@ router.post(
         (error, token) => {
           if (error) {
             res.status(500).send('Server Error');
-            console.log(error.message)
+            console.log(error.message);
           }
 
           res.json({ token });
