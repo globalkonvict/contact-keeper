@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client-start": "npm start --prefix client",
+    "client-css-start": "npm run css-watch --prefix client",
+    "dev": "concurrently \"npm run client-start \" \"npm run client-css-start \" \"npm run server\""
   },
   "keywords": [],
   "author": "",
