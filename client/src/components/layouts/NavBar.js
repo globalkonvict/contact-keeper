@@ -12,7 +12,7 @@ export const NavBar = () => {
         <div className="container">
           <div className="navbar-brand">
             <Link className="navbar-item" to="/">
-              <i class="fas fa-address-card is-size-1 is-size-2-touch mx1" />
+              <i className="fas fa-address-card is-size-1 is-size-2-touch has-rem-margin-right-1" />
               <span className="is-size-4">ContactKeeper</span>
             </Link>
             <span className="navbar-burger" onClick={onToggle}>

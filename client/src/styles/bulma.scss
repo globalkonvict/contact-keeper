@@ -1,17 +1,13 @@
 @charset "utf-8";
 @import '../../node_modules/bulma/bulma.sass';
+@import '../../node_modules/bulma-spacing/bulma-spacing.scss';
 
-.mx1 {
-  margin-left: 0rem;
-  margin-right: 1rem;
+body {
+  background: #f5f6fa;
 }
 
-.mx2 {
-  margin-left: 0rem;
-  margin-right: 2rem;
-}
-
-.mx3 {
-  margin-left: 0rem;
-  margin-right: 3rem;
+.align-left-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
