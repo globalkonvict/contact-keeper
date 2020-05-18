@@ -8,35 +8,31 @@ import {
   CLEAR_FILTER,
 } from '../types';
 
+import ReducerWare from './ReducerWare';
+
 function contactReducer(state, { type, payload }) {
-  switch (type) {
-    case ADD_CONTACT:
-      return { ...state, contacts: [...state.contacts, payload] };
-    case UPDATE_CONTACT:
-      return {
-        ...state,
-        contacts: state.contacts.map(contact =>
-          contact.id === payload.id ? payload : contact
-        ),
-      };
-    case DELETE_CONTACT:
-      return {
-        ...state,
-        contacts: state.contacts.filter(contact => contact.id !== payload),
-      };
-    case SET_CURRENT:
-      return {
-        ...state,
-        current: payload,
-      };
-    case CLEAR_CURRENT:
-      return {
-        ...state,
-        current: null,
-      };
-    default:
-      return state;
+  if (type === ADD_CONTACT) {
+    return ReducerWare.applyAddContact(state, payload);
   }
+  if (type === UPDATE_CONTACT) {
+    return ReducerWare.applyUpdateContact(state, payload);
+  }
+  if (type === DELETE_CONTACT) {
+    return ReducerWare.applyDeleteContact(state, payload);
+  }
+  if (type === FILTER_CONTACTS) {
+    return ReducerWare.applyFilter(state, payload);
+  }
+  if (type === CLEAR_FILTER) {
+    return ReducerWare.applyClearFilter(state);
+  }
+  if (type === SET_CURRENT) {
+    return ReducerWare.applySetCurrent(state, payload);
+  }
+  if (type === CLEAR_CURRENT) {
+    return ReducerWare.applyClearCurrent(state);
+  }
+  return state;
 }
 
 export default contactReducer;

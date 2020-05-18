@@ -3,10 +3,16 @@ import ContactContext from '../../context/contacts/ContactContext';
 
 export const ContactCard = ({ contact }) => {
   const { id, name, email, phone, type } = contact;
-  const { deleteContact, setCurrent } = useContext(ContactContext);
+  const { deleteContact, setCurrent, clearCurrent } = useContext(
+    ContactContext
+  );
+  const handleDelete = e => {
+    deleteContact(id);
+    clearCurrent();
+  };
 
   return (
-    <div className="card has-rem-margin-bottom-3 has-margin-top-50">
+    <div className="card has-rem-margin-bottom-3 has-margin-top-15">
       <header className="card-header">
         <p className="card-header-title">{name}</p>
         <div className="card-header-icon">
@@ -44,7 +50,7 @@ export const ContactCard = ({ contact }) => {
         </button>
         <button
           className="button is-danger has-rem-margin-right-2"
-          onClick={e => deleteContact(id)}
+          onClick={handleDelete}
         >
           Delete
         </button>

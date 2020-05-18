@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
 import ContactContext from '../../context/contacts/ContactContext';
 import ContactCard from './ContactCard';
+import ContactFilter from './ContactFilter';
 
 const ContactList = () => {
   const contactContext = useContext(ContactContext);
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
   return (
     <div>
-      {contacts.map(contact => (
-        <ContactCard key={contact.name} contact={contact} />
-      ))}
+      <ContactFilter />
+      {filtered !== null
+        ? filtered.map(contact => (
+            <ContactCard key={contact.name} contact={contact} />
+          ))
+        : contacts.map(contact => (
+            <ContactCard key={contact.name} contact={contact} />
+          ))}
     </div>
   );
 };

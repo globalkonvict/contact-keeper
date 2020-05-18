@@ -44,12 +44,9 @@ const ContactForm = () => {
     } else {
       setContact(current);
     }
-  }, [ContactContext, current]);
+  }, [current]);
   return (
-    <form
-      onSubmit={onSubmit}
-      className="has-rem-margin-bottom-3 has-margin-top-50"
-    >
+    <form onSubmit={onSubmit} className="box has-rem-padding-2">
       <h2 style={{ textAlign: 'center' }} className="title is-4">
         {current ? 'Update Contact' : 'Add Contact'}
       </h2>

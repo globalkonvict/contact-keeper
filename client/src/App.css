@@ -16180,3 +16180,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between; }
+
+.search-contacts {
+  display: flex;
+  flex-direction: column; }

@@ -5,7 +5,7 @@ import ContactForm from '../contacts/ContactForm';
 export const Home = () => {
   return (
     <div className="container">
-      <div className="columns is-centered">
+      <div className="columns is-centered has-rem-margin-bottom-3 has-margin-top-50">
         <div className="column is-4 has-rem-padding-2">
           <ContactForm />
         </div>
