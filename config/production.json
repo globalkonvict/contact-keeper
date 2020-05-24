@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://sarthak:8anoLptQhQp1sQKu@contact-keeper-react-ivwis.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "S3KR3TASECRET"
+}
