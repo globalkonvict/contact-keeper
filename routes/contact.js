@@ -59,16 +59,26 @@ router.post(
 //@desc    update user's contacts
 //@access  private
 
-router.put('/:id', (req, res) => {
-  res.send('update contacts');
+router.put('/:id',auth, async (req, res) => {
+  const id = req.params.id;
+  const { email, name, phone, type } = req.body;
+  await Contact.findByIdAndUpdate(id, { email, name, phone, type });
+  res.send('done')
 });
 
 //@route   DELETE api/contacts
 //@desc    get users all contacts
 //@access  private
 
-router.delete('/:id', (req, res) => {
-  res.send('delete user');
+router.delete('/:id', auth, async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    await Contact.deleteOne({ _id: id });
+    await res.json({ msg: 'Contact Deleted' });
+  } catch (error) {
+    console.log(err.message);
+  }
 });
 
 module.exports = router;

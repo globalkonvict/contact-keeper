@@ -2,9 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contacts/ContactContext';
 
 const ContactForm = () => {
-  const { addContact, updateContact, current, clearCurrent } = useContext(
-    ContactContext
-  );
+  const { 
+    addContact, 
+    updateContact, 
+    current, 
+    clearCurrent } = useContext(ContactContext);
 
   const [contact, setContact] = useState({
     name: '',
@@ -12,6 +14,7 @@ const ContactForm = () => {
     phone: '',
     type: '',
   });
+
   const { name, email, phone, type } = contact;
 
   const onInput = e =>
@@ -45,6 +48,7 @@ const ContactForm = () => {
       setContact(current);
     }
   }, [current]);
+
   return (
     <form onSubmit={onSubmit} className="box has-rem-padding-2">
       <h2 style={{ textAlign: 'center' }} className="title is-4">

@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import ContactContext from '../../context/contacts/ContactContext';
 
 export const ContactCard = ({ contact }) => {
-  const { id, name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = contact;
   const { deleteContact, setCurrent, clearCurrent } = useContext(
     ContactContext
   );
   const handleDelete = e => {
-    deleteContact(id);
+    deleteContact(_id);
     clearCurrent();
   };
 
