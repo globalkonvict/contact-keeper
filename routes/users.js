@@ -3,32 +3,21 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/auth');
 
 const User = require('../models/Users');
 
-//@route   GET api/auth
-//@desc    Get logged in user
-//@access  private
-
-router.get('/', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-
-//@route   POST api/auth
-//@desc    Auth user and Get Token
-//@access  private
+//@route   POST api/users
+//@desc    Register a user
+//@access  public
 
 router.post(
   '/',
   [
-    check('email', 'Enter a valid email').isEmail(),
-    check('password', 'Enter a password').exists(),
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Email is Required').isEmail(),
+    check('password', 'Enter a Password with atleast 6 characters').isLength({
+      min: 6,
+    }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -36,19 +25,24 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, name, password } = req.body;
+
     try {
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
 
-      if (!user) {
-        return res.status(400).json({ msg: 'User doesnt exists' });
+      if (user) {
+        return res.status(400).json({ msg: 'User already Exists.' });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      user = new User({
+        name,
+        email,
+        password,
+      });
 
-      if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid credintials' });
-      }
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+      await user.save();
 
       const payload = {
         user: {
