@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const connectDB = require('./config/db');
+const connectDB = require('./db/db');
+
+//Setup Env Variables
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const PORT = process.env.PORT || 5000;
 
